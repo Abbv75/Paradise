@@ -138,12 +138,11 @@ public class SQL_Outil {
     }
     
     public ResultSet simple_select(String tableName){
-        String query="SELECT * FROM "+tableName+";";
+        String query="SELECT * FROM "+tableName+" ORDER BY id DESC;";
         Object resultat=new Object();
         try{
             PreparedStatement stm= conn.prepareStatement(query);
             resultat=(ResultSet)stm.executeQuery();
-            
         }
         catch (Exception e){
             e.printStackTrace();
@@ -154,7 +153,7 @@ public class SQL_Outil {
     }
     
     public ResultSet select_from_id(String tableName, int id){
-        String query="SELECT * FROM "+tableName+" WHERE id="+id+";";
+        String query="SELECT * FROM "+tableName+" WHERE id="+id+" ORDER BY id DESC;";
         Object resultat=new Object();
         try{
             PreparedStatement stm= conn.prepareStatement(query);
