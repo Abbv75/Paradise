@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,9 +28,12 @@ public class Enregistrement extends javax.swing.JFrame {
     /**
      * Creates new form Enregistrement
      */
+    public static int ticketNumber=0;
+    
     public Enregistrement() {
         initComponents();
         remplir_bloc();
+        
     }
     
     public SQL_Outil C1=new SQL_Outil("paradis");
@@ -49,7 +53,6 @@ public class Enregistrement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         enregistrement_genre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        enregistrement_date = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         enregistrement_prenom = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -57,13 +60,12 @@ public class Enregistrement extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         enregistrement_motif = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        block = new javax.swing.JComboBox<>();
+        enregistrement_block = new javax.swing.JComboBox<>();
         enregistrement_btn_enregistrer = new javax.swing.JButton();
         enregistrement_btn_annuler = new javax.swing.JButton();
-        enregistrement_date1 = new com.toedter.calendar.JDateChooser();
+        enregistrement_date = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,12 +86,6 @@ public class Enregistrement extends javax.swing.JFrame {
         });
 
         jLabel4.setText("date de naissance:");
-
-        enregistrement_date.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enregistrement_dateActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Prenom:");
 
@@ -117,10 +113,10 @@ public class Enregistrement extends javax.swing.JFrame {
 
         jLabel8.setText("bloc");
 
-        block.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        block.addActionListener(new java.awt.event.ActionListener() {
+        enregistrement_block.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        enregistrement_block.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blockActionPerformed(evt);
+                enregistrement_blockActionPerformed(evt);
             }
         });
 
@@ -138,58 +134,58 @@ public class Enregistrement extends javax.swing.JFrame {
             }
         });
 
-        enregistrement_date1.setDateFormatString("MM-dd-yyyy");
+        enregistrement_date.setNextFocusableComponent(enregistrement_motif);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(64, 64, 64)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(enregistrement_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(enregistrement_date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(enregistrement_date, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(enregistrement_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(enregistrement_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(enregistrement_prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(enregistrement_motif, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(enregistrement_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addComponent(enregistrement_prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(enregistrement_motif, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
-                                .addComponent(enregistrement_date, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(enregistrement_btn_enregistrer)
-                                .addGap(75, 75, 75)
-                                .addComponent(enregistrement_btn_annuler)))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(enregistrement_btn_enregistrer)
+                        .addGap(75, 75, 75)
+                        .addComponent(enregistrement_btn_annuler)
+                        .addGap(224, 224, 224)))
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(376, 376, 376)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,32 +200,26 @@ public class Enregistrement extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(enregistrement_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enregistrement_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
                         .addComponent(jLabel7)
                         .addComponent(enregistrement_motif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(enregistrement_date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(enregistrement_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel4)
+                        .addComponent(enregistrement_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enregistrement_btn_enregistrer)
                     .addComponent(enregistrement_btn_annuler))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 34)); // NOI18N
@@ -240,36 +230,27 @@ public class Enregistrement extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(493, 493, 493)
+                .addGap(328, 328, 328)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1248, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,9 +258,7 @@ public class Enregistrement extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,10 +272,6 @@ public class Enregistrement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enregistrement_genreActionPerformed
 
-    private void enregistrement_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrement_dateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enregistrement_dateActionPerformed
-
     private void enregistrement_prenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrement_prenomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enregistrement_prenomActionPerformed
@@ -309,29 +284,38 @@ public class Enregistrement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enregistrement_motifActionPerformed
 
-    private void blockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockActionPerformed
+    private void enregistrement_blockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrement_blockActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_blockActionPerformed
+    }//GEN-LAST:event_enregistrement_blockActionPerformed
 
     private void enregistrement_btn_enregistrerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enregistrement_btn_enregistrerMouseClicked
         // TODO add your handling code here:
-        if(enregister()){
-            JOptionPane.showMessageDialog(this, "Patient Enregistrer", "enregistrer", JOptionPane.INFORMATION_MESSAGE);
+        if(!enregistrement_nom.getText().equals("") && !enregistrement_prenom.getText().equals("") && !enregistrement_tel.getText().equals("") && !enregistrement_genre.getText().equals("") && !enregistrement_motif.getText().equals("")){
+            if(enregister()){
+                JOptionPane.showMessageDialog(this, "Patient Enregistrer", "enregistrer", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Erreur d'enregistrement", "erreur", JOptionPane.CANCEL_OPTION);
+            }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Erreur d'enregistrement", "erreur", JOptionPane.CANCEL_OPTION);
+            JOptionPane.showMessageDialog(this, "Veuillez emplir les champs", "erreur", JOptionPane.CANCEL_OPTION);
+
         }
+        
         
     }//GEN-LAST:event_enregistrement_btn_enregistrerMouseClicked
 
     private void enregistrement_btn_annulerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enregistrement_btn_annulerMouseClicked
         // TODO add your handling code here:
+        SimpleDateFormat test=new SimpleDateFormat("dd-MM-yyyy");
+
         enregistrement_nom.setText("");
-        enregistrement_nom.setText("");
+        enregistrement_prenom.setText("");
         enregistrement_genre.setText("");
         enregistrement_tel.setText("");
-        System.out.println(enregistrement_date1.getDate());
         System.out.println("Annuler");
+        
         JOptionPane.showMessageDialog(this, "Enregistrement Annuler", "annuler", JOptionPane.CANCEL_OPTION);
     }//GEN-LAST:event_enregistrement_btn_annulerMouseClicked
 
@@ -391,15 +375,16 @@ public class Enregistrement extends javax.swing.JFrame {
                 for(i=0;i<block_request.size();i++){
                     block_list[i]=block_request.get(i);
                 }
-                block.setModel(new javax.swing.DefaultComboBoxModel<>(block_list));
+                enregistrement_block.setModel(new javax.swing.DefaultComboBoxModel<>(block_list));
             }
             catch(Exception e){
-                        
+                e.printStackTrace();   
             } 
         }
     }
     
     public boolean enregister(){
+        SimpleDateFormat dateFormater=new SimpleDateFormat("yyyy-MM-dd");
         head[0]="nom";
         head[1]="prenom";
         head[2]="genre";
@@ -410,44 +395,105 @@ public class Enregistrement extends javax.swing.JFrame {
         fields[0]=enregistrement_nom.getText();
         fields[1]=enregistrement_prenom.getText();
         fields[2]=enregistrement_genre.getText();
-        fields[3]=enregistrement_date1.getDateFormatString();
+        fields[3]=dateFormater.format(new Date(String.valueOf(enregistrement_date.getDate())));
         fields[4]=enregistrement_tel.getText();
         //fields[5]=enregistrement_motif.getText();
         
-        return C1.insert_into("patient", head, fields);
-    }
-
-    /*
-    SQL_Outil C1=new SQL_Outil("paradis");
-    private void connection(){
-        C1.try_connection();
-        
-        String[] t =new String[5];
-        t[0]="nom";
-        t[1]="prenom";
-        t[2]="email";
-        t[3]="mot_de_passe";
-        t[4]="role";
-        String[] t2 =new String[5];
-        t2[0]="tgl1";
-        t2[1]="tgl2";
-        t2[2]="tgl3";
-        t2[3]="tgl4";
-        t2[4]="tgl5";
-
-        C1.edit_from_id("user",t,t2,8);
-        //C1.insert_into("user",t,t2);
-    }
-    */
+        if(C1.insert_into("patient", head, fields)){
+            if(createTicket()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }  
     
-     
+    public boolean createTicket(){
+        try{
+            ResultSet query=catchPatient(fields[0],fields[1],fields[4]);
+            if(query!=null){
+                query.next();
+                
+                String[] ticketHead=new String[4];
+                ticketHead[0]="numero";
+                ticketHead[1]="motif";
+                ticketHead[2]="id_bloc";
+                ticketHead[3]="id_patient";
+                
+                String[] ticketContent=new String[4];
+                ticketNumber++;
+                ticketContent[0]="A"+ticketNumber;
+                ticketContent[1]=enregistrement_motif.getText();
+                ResultSet blockId=catchBloc((String) enregistrement_block.getSelectedItem());
+                if(blockId!=null){
+                    blockId.next();
+                    ticketContent[2]=blockId.getString("id");
+                }
+                else{
+                    return false;
+                }
+                ticketContent[3]=query.getString("id");
+                if(C1.insert_into("ticket", ticketHead, ticketContent)){
+                    return true;
+                }
+                else{
+                    return false;
+                }  
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Erreur de connexion");
+            return false;
+        }
+        return false;
+    }
+    
+    public ResultSet catchPatient(String nom, String prenom, String tel){
+        String query="SELECT * FROM patient WHERE nom=? AND prenom=? AND tel=?;";
+        Object resultat=new Object();
+        C1.try_connection();
+        try{
+            PreparedStatement stm= C1.conn.prepareStatement(query);
+            stm.setString(1, nom);
+            stm.setString(2, prenom);
+            stm.setString(3, tel);
+            resultat=(ResultSet)stm.executeQuery();
+            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Erreur de connexion");
+            resultat=null;
+        }
+        return (ResultSet)resultat;
+    }
+    public ResultSet catchBloc(String nom){
+        String query="SELECT * FROM bloc WHERE nom=?;";
+        Object resultat=new Object();
+        C1.try_connection();
+        try{
+            PreparedStatement stm= C1.conn.prepareStatement(query);
+            stm.setString(1, nom);
+            resultat=(ResultSet)stm.executeQuery(); 
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Erreur de connexion");
+            resultat=null;
+        }
+        return (ResultSet)resultat;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> block;
+    private javax.swing.JComboBox<String> enregistrement_block;
     private javax.swing.JButton enregistrement_btn_annuler;
     private javax.swing.JButton enregistrement_btn_enregistrer;
-    private javax.swing.JTextField enregistrement_date;
-    private com.toedter.calendar.JDateChooser enregistrement_date1;
+    private com.toedter.calendar.JDateChooser enregistrement_date;
     private javax.swing.JTextField enregistrement_genre;
     private javax.swing.JTextField enregistrement_motif;
     private javax.swing.JTextField enregistrement_nom;
@@ -463,6 +509,5 @@ public class Enregistrement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
