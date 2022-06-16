@@ -51,7 +51,6 @@ public class Enregistrement extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         enregistrement_nom = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        enregistrement_genre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         enregistrement_prenom = new javax.swing.JTextField();
@@ -64,6 +63,7 @@ public class Enregistrement extends javax.swing.JFrame {
         enregistrement_btn_enregistrer = new javax.swing.JButton();
         enregistrement_btn_annuler = new javax.swing.JButton();
         enregistrement_date = new com.toedter.calendar.JDateChooser();
+        enregistrement_genre = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -78,12 +78,6 @@ public class Enregistrement extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Genre:");
-
-        enregistrement_genre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enregistrement_genreActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("date de naissance:");
 
@@ -136,6 +130,8 @@ public class Enregistrement extends javax.swing.JFrame {
 
         enregistrement_date.setNextFocusableComponent(enregistrement_motif);
 
+        enregistrement_genre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "homme", "femme" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,7 +139,7 @@ public class Enregistrement extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -154,7 +150,11 @@ public class Enregistrement extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel4)
@@ -181,12 +181,6 @@ public class Enregistrement extends javax.swing.JFrame {
                         .addComponent(enregistrement_btn_annuler)
                         .addGap(224, 224, 224)))
                 .addContainerGap(90, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(376, 376, 376)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +196,9 @@ public class Enregistrement extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(enregistrement_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enregistrement_genre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,11 +207,7 @@ public class Enregistrement extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4)
                         .addComponent(enregistrement_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(enregistrement_block, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enregistrement_btn_enregistrer)
                     .addComponent(enregistrement_btn_annuler))
@@ -268,10 +260,6 @@ public class Enregistrement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enregistrement_nomActionPerformed
 
-    private void enregistrement_genreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrement_genreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enregistrement_genreActionPerformed
-
     private void enregistrement_prenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrement_prenomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enregistrement_prenomActionPerformed
@@ -290,7 +278,7 @@ public class Enregistrement extends javax.swing.JFrame {
 
     private void enregistrement_btn_enregistrerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enregistrement_btn_enregistrerMouseClicked
         // TODO add your handling code here:
-        if(!enregistrement_nom.getText().equals("") && !enregistrement_prenom.getText().equals("") && !enregistrement_tel.getText().equals("") && !enregistrement_genre.getText().equals("") && !enregistrement_motif.getText().equals("")){
+        if(!enregistrement_nom.getText().equals("") && !enregistrement_prenom.getText().equals("") && !enregistrement_tel.getText().equals("") && !enregistrement_motif.getText().equals("")){
             if(enregister()){
                 JOptionPane.showMessageDialog(this, "Patient Enregistrer", "enregistrer", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -312,8 +300,8 @@ public class Enregistrement extends javax.swing.JFrame {
 
         enregistrement_nom.setText("");
         enregistrement_prenom.setText("");
-        enregistrement_genre.setText("");
         enregistrement_tel.setText("");
+        enregistrement_motif.setText("");
         System.out.println("Annuler");
         
         JOptionPane.showMessageDialog(this, "Enregistrement Annuler", "annuler", JOptionPane.CANCEL_OPTION);
@@ -394,14 +382,26 @@ public class Enregistrement extends javax.swing.JFrame {
         
         fields[0]=enregistrement_nom.getText();
         fields[1]=enregistrement_prenom.getText();
-        fields[2]=enregistrement_genre.getText();
+        fields[2]=(String)enregistrement_genre.getSelectedItem();
         fields[3]=dateFormater.format(new Date(String.valueOf(enregistrement_date.getDate())));
         fields[4]=enregistrement_tel.getText();
         //fields[5]=enregistrement_motif.getText();
         
         if(C1.insert_into("patient", head, fields)){
             if(createTicket()){
-                return true;
+                try{
+                    ResultSet select =C1.simple_select("ticket");
+                    select.next();
+                    ResultSet bloc =C1.select_from_id("bloc",Integer.parseInt(select.getString("id_bloc")));
+                    bloc.next();
+                    JOptionPane.showMessageDialog(this, "Votre numero de ticket est"+select.getString("id")+select.getString("numero")+"\nDirigez vous vers le bloc "+bloc.getString("nom"), "Ticket No"+select.getString("id")+select.getString("numero"), JOptionPane.INFORMATION_MESSAGE);
+
+                    return true;
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                    return false;
+                }
             }
             else{
                 return false;
@@ -494,7 +494,7 @@ public class Enregistrement extends javax.swing.JFrame {
     private javax.swing.JButton enregistrement_btn_annuler;
     private javax.swing.JButton enregistrement_btn_enregistrer;
     private com.toedter.calendar.JDateChooser enregistrement_date;
-    private javax.swing.JTextField enregistrement_genre;
+    private javax.swing.JComboBox<String> enregistrement_genre;
     private javax.swing.JTextField enregistrement_motif;
     private javax.swing.JTextField enregistrement_nom;
     private javax.swing.JTextField enregistrement_prenom;
