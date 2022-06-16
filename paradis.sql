@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 16 juin 2022 à 01:59
+-- Généré le :  jeu. 16 juin 2022 à 20:45
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.11
 
@@ -43,6 +43,14 @@ CREATE TABLE `bloc` (
   `id` int(11) NOT NULL,
   `nom` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `bloc`
+--
+
+INSERT INTO `bloc` (`id`, `nom`) VALUES
+(1, 'block1'),
+(2, 'block2');
 
 -- --------------------------------------------------------
 
@@ -131,6 +139,22 @@ CREATE TABLE `patient` (
   `tel` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `patient`
+--
+
+INSERT INTO `patient` (`id`, `nom`, `prenom`, `genre`, `date_naissance`, `tel`) VALUES
+(1, 'bore', 'younouss', 'male', '2012-12-12', '666'),
+(2, 'd2', 'd2', 'd2', '2022-06-03', 's2'),
+(3, '1', '2', '2', '2022-06-10', '1'),
+(4, 'testets', 'testets', 'testets', '2022-06-05', '54654'),
+(5, 'opop', 'opop', 'opop', '2022-06-04', '7+845'),
+(6, 'opop', 'opop', 'opop', '2022-06-04', '7+845'),
+(7, '654', '654', '654', '2022-06-04', '654'),
+(8, '45', '45', '45', '2022-06-04', '45'),
+(9, '13', '13', '13', '2022-06-04', '13'),
+(10, '35', '35', '35', '2022-06-04', '35');
+
 -- --------------------------------------------------------
 
 --
@@ -168,12 +192,20 @@ CREATE TABLE `relation_prise_en_charge` (
 
 CREATE TABLE `ticket` (
   `id` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
+  `numero` varchar(10) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `motif` text NOT NULL,
-  `montant` float NOT NULL,
-  `id_bloc` int(11) NOT NULL
+  `id_bloc` int(11) NOT NULL,
+  `id_patient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ticket`
+--
+
+INSERT INTO `ticket` (`id`, `numero`, `date`, `motif`, `id_bloc`, `id_patient`) VALUES
+(1, 'A2', '2022-06-16 18:16:32', 'opop', 8, 5),
+(2, 'A1', '2022-06-16 18:36:01', '35', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -199,8 +231,22 @@ CREATE TABLE `user` (
   `email` varchar(60) NOT NULL,
   `mot_de_passe` varchar(30) NOT NULL,
   `role` varchar(20) NOT NULL,
-  `id_bloc` int(11) NOT NULL
+  `id_bloc` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`, `id_bloc`) VALUES
+(5, '46', '45', '', '47', '48', NULL),
+(6, '46', '45', '', '47', '48', NULL),
+(7, '46', '47', '48', '45', '', NULL),
+(8, 'tgl1', 'tgl2', 'tgl3', 'tgl4', 'tgl5', NULL),
+(9, '48', '47', '46', '', '45', NULL),
+(10, 'B48', 'B3', 'Bonjours2', 'email', 'Bonjour', NULL),
+(11, 'B48', 'B3', 'Bonjours2', 'emailtest', 'Bonjour', NULL),
+(12, 'nom', 'prenom', 'email', 'mot_de_passe', 'role', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -288,7 +334,8 @@ ALTER TABLE `relation_prise_en_charge`
 -- Index pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_patient` (`id_patient`);
 
 --
 -- Index pour la table `traitement`
@@ -317,7 +364,7 @@ ALTER TABLE `analyse`
 -- AUTO_INCREMENT pour la table `bloc`
 --
 ALTER TABLE `bloc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `chambre`
@@ -359,7 +406,7 @@ ALTER TABLE `ordonnance`
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `prise_en_charge`
@@ -377,7 +424,7 @@ ALTER TABLE `relation_prise_en_charge`
 -- AUTO_INCREMENT pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `traitement`
@@ -389,7 +436,7 @@ ALTER TABLE `traitement`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
@@ -436,6 +483,12 @@ ALTER TABLE `prise_en_charge`
 ALTER TABLE `relation_prise_en_charge`
   ADD CONSTRAINT `relation_prise_en_charge_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `relation_prise_en_charge_ibfk_2` FOREIGN KEY (`id_prise_en_charge`) REFERENCES `prise_en_charge` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `user`

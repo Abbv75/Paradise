@@ -20,7 +20,7 @@ public class SQL_Outil {
     private String urlBDD;
     private String user ;
     private String passwd;
-    private Connection conn;
+    public Connection conn;
     
     public SQL_Outil(String dbName_tmp){
         this.dbName=dbName_tmp;
@@ -138,35 +138,33 @@ public class SQL_Outil {
     }
     
     public ResultSet simple_select(String tableName){
-        String select_info_id_client="SELECT * FROM "+tableName+";";
+        String query="SELECT * FROM "+tableName+";";
         Object resultat=new Object();
         try{
-            PreparedStatement stm= conn.prepareStatement(select_info_id_client);
+            PreparedStatement stm= conn.prepareStatement(query);
             resultat=(ResultSet)stm.executeQuery();
-            System.out.println("Ca marche mec");
-            return (ResultSet)resultat;
+            
         }
         catch (Exception e){
             e.printStackTrace();
             System.out.println("Erreur de connexion");
+            resultat=null;
         }
-        return null;
+        return (ResultSet)resultat;
     }
     
     public ResultSet select_from_id(String tableName, int id){
-        String select_info_id_client="SELECT * FROM "+tableName+" WHERE id="+id+";";
+        String query="SELECT * FROM "+tableName+" WHERE id="+id+";";
         Object resultat=new Object();
         try{
-            PreparedStatement stm= conn.prepareStatement(select_info_id_client);
+            PreparedStatement stm= conn.prepareStatement(query);
             resultat=(ResultSet)stm.executeQuery();
-            System.out.println("Ca marche mec");
-            return (ResultSet)resultat;
         }
         catch (Exception e){
             e.printStackTrace();
-            System.out.println("Erreur de connexion");
+            resultat=null;
         }
-        return null;
+        return (ResultSet)resultat;
     }
     
 }
