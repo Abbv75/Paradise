@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 16 juin 2022 à 20:45
+-- Généré le :  ven. 17 juin 2022 à 22:58
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.11
 
@@ -153,7 +153,11 @@ INSERT INTO `patient` (`id`, `nom`, `prenom`, `genre`, `date_naissance`, `tel`) 
 (7, '654', '654', '654', '2022-06-04', '654'),
 (8, '45', '45', '45', '2022-06-04', '45'),
 (9, '13', '13', '13', '2022-06-04', '13'),
-(10, '35', '35', '35', '2022-06-04', '35');
+(10, '35', '35', '35', '2022-06-04', '35'),
+(11, 'bore', 'younouss', '54', '2022-06-05', '15'),
+(12, '54', '65', 'homme', '2022-06-04', '65'),
+(13, '54', '65', 'homme', '2022-06-04', '65'),
+(14, 'rthrdtrthrthh', 'dfgnntjtj', 'homme', '2022-06-05', 'rrdtjhrj');
 
 -- --------------------------------------------------------
 
@@ -195,6 +199,7 @@ CREATE TABLE `ticket` (
   `numero` varchar(10) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `motif` text NOT NULL,
+  `statut` tinyint(1) NOT NULL DEFAULT 1,
   `id_bloc` int(11) NOT NULL,
   `id_patient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -203,9 +208,10 @@ CREATE TABLE `ticket` (
 -- Déchargement des données de la table `ticket`
 --
 
-INSERT INTO `ticket` (`id`, `numero`, `date`, `motif`, `id_bloc`, `id_patient`) VALUES
-(1, 'A2', '2022-06-16 18:16:32', 'opop', 8, 5),
-(2, 'A1', '2022-06-16 18:36:01', '35', 1, 10);
+INSERT INTO `ticket` (`id`, `numero`, `date`, `motif`, `statut`, `id_bloc`, `id_patient`) VALUES
+(6, 'yukg', '2022-06-17 20:13:40', 'tyj', 1, 1, 9),
+(7, 'tf', '2022-06-17 20:13:40', 'tj', 1, 1, 7),
+(8, 'A1', '2022-06-17 20:14:47', 'drhrdjryj', 1, 1, 14);
 
 -- --------------------------------------------------------
 
@@ -246,7 +252,7 @@ INSERT INTO `user` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`, `id_
 (9, '48', '47', '46', '', '45', NULL),
 (10, 'B48', 'B3', 'Bonjours2', 'email', 'Bonjour', NULL),
 (11, 'B48', 'B3', 'Bonjours2', 'emailtest', 'Bonjour', NULL),
-(12, 'nom', 'prenom', 'email', 'mot_de_passe', 'role', NULL);
+(12, 'nom', 'prenom', 'email', 'mot_de_passe', 'role', 1);
 
 --
 -- Index pour les tables déchargées
@@ -335,7 +341,8 @@ ALTER TABLE `relation_prise_en_charge`
 --
 ALTER TABLE `ticket`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_patient` (`id_patient`);
+  ADD KEY `id_patient` (`id_patient`),
+  ADD KEY `id_bloc` (`id_bloc`);
 
 --
 -- Index pour la table `traitement`
@@ -406,7 +413,7 @@ ALTER TABLE `ordonnance`
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `prise_en_charge`
@@ -424,7 +431,7 @@ ALTER TABLE `relation_prise_en_charge`
 -- AUTO_INCREMENT pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `traitement`
@@ -488,7 +495,8 @@ ALTER TABLE `relation_prise_en_charge`
 -- Contraintes pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`id_bloc`) REFERENCES `bloc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `user`
