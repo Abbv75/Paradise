@@ -9,12 +9,21 @@ package paradise.objets;
  * @author Younouss boré
  */
 public class Patient{
-    private String id;
-    private String nom;
-    private String prenom;
-    private String date;
-    private String genre;
-    private String motif;
-    private String numero_ticket;
+    public int id;
+    public String nom;
+    public String prenom;
+    public String date;
+    public String genre;
+    public String motif;
+    public String numero_ticket;
+    public Patient(int _id, String _nom, String _prenom, String _date, String _genre , String _motif, String _numero_ticket){
+        this.id=_id;
+        this.nom=_nom;
+        this.prenom=_prenom;
+        this.date=_date;
+        this.motif=_motif;
+        this.motif=_numero_ticket;
+        this.genre=_genre;
+    }
     
 }
