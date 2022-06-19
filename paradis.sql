@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 17 juin 2022 à 22:58
+-- Généré le :  sam. 18 juin 2022 à 14:14
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.11
 
@@ -168,7 +168,7 @@ INSERT INTO `patient` (`id`, `nom`, `prenom`, `genre`, `date_naissance`, `tel`) 
 CREATE TABLE `prise_en_charge` (
   `id` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `id_patient` int(11) DEFAULT NULL,
+  `id_patient` int(11) NOT NULL,
   `id_consultation` int(11) DEFAULT NULL,
   `id_ordonnance` int(11) DEFAULT NULL,
   `id_analyse` int(11) DEFAULT NULL,

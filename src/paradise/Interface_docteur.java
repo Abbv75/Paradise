@@ -4,12 +4,17 @@
  */
 package paradise;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import paradise.objets.Medecin;
-import paradise.objets.Patient;
+import java.sql.PreparedStat
+ment;
+import java.sql.Res
+ltSet;
+import java.util.Ar
+
+ionPane;
+import paradise.objet
+.Medecin;
+import paradise.obje
+s.Patient;
 import paradise.objets.SQL_Outil;
 
 /**
@@ -28,8 +33,8 @@ public class Interface_docteur extends javax.swing.JFrame {
         }
         else{
             System.out.println("test non ok");
-
         }
+        supprimer_block();
     }
 
     /**
@@ -46,8 +51,8 @@ public class Interface_docteur extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         search_input = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        docteur_search_btn = new javax.swing.JButton();
+        docteur_reset_btn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
@@ -242,7 +247,7 @@ public class Interface_docteur extends javax.swing.JFrame {
         genre10 = new javax.swing.JLabel();
         motif10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setText("Bloc:");
 
@@ -250,7 +255,7 @@ public class Interface_docteur extends javax.swing.JFrame {
 
         jButton1.setText("Deconnexion");
 
-        search_input.setForeground(new java.awt.Color(204, 204, 204));
+        search_input.setForeground(new java.awt.Color(51, 51, 51));
         search_input.setText("saisissez numero ticket ou nom patient");
         search_input.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -258,14 +263,19 @@ public class Interface_docteur extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Rechercher");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        docteur_search_btn.setText("Rechercher");
+        docteur_search_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                docteur_search_btnMouseClicked(evt);
             }
         });
 
-        jButton3.setText("reset");
+        docteur_reset_btn.setText("reset");
+        docteur_reset_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                docteur_reset_btnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -281,9 +291,9 @@ public class Interface_docteur extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(search_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(docteur_search_btn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(docteur_reset_btn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(0, 0, 0))
@@ -297,8 +307,8 @@ public class Interface_docteur extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(search_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(docteur_search_btn)
+                    .addComponent(docteur_reset_btn))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
@@ -367,7 +377,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif1)))
-                .addGap(237, 237, 237))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         patient_zone1Layout.setVerticalGroup(
             patient_zone1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,14 +413,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton8.setText("COnsulter");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
         jButton9.setText("Analyser");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
 
         jButton10.setText("Donner ordonnance");
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
 
         traitement1.setText("Faire traitement");
+        traitement1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                traitement1MouseClicked(evt);
+            }
+        });
 
         hopital1.setText("Hospitaliser");
+        hopital1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone1Layout = new javax.swing.GroupLayout(button_zone1);
         button_zone1.setLayout(button_zone1Layout);
@@ -453,14 +488,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton13.setText("COnsulter");
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+        });
 
         jButton14.setText("Analyser");
+        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton14MouseClicked(evt);
+            }
+        });
 
         jButton15.setText("Donner ordonnance");
+        jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton15MouseClicked(evt);
+            }
+        });
 
         traitement2.setText("Faire traitement");
+        traitement2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                traitement2MouseClicked(evt);
+            }
+        });
 
         hopital2.setText("Hospitaliser");
+        hopital2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone2Layout = new javax.swing.GroupLayout(button_zone2);
         button_zone2.setLayout(button_zone2Layout);
@@ -556,7 +616,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif2)))
-                .addGap(237, 237, 237))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         patient_zone2Layout.setVerticalGroup(
             patient_zone2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,14 +652,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton18.setText("COnsulter");
+        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton18MouseClicked(evt);
+            }
+        });
 
         jButton19.setText("Analyser");
+        jButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton19MouseClicked(evt);
+            }
+        });
 
         jButton20.setText("Donner ordonnance");
+        jButton20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton20MouseClicked(evt);
+            }
+        });
 
         jButton21.setText("Faire traitement");
+        jButton21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton21MouseClicked(evt);
+            }
+        });
 
         hopital3.setText("Hospitaliser");
+        hopital3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone3Layout = new javax.swing.GroupLayout(button_zone3);
         button_zone3.setLayout(button_zone3Layout);
@@ -695,7 +780,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif3)))
-                .addGap(237, 237, 237))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         patient_zone3Layout.setVerticalGroup(
             patient_zone3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -731,14 +816,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton23.setText("COnsulter");
+        jButton23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton23MouseClicked(evt);
+            }
+        });
 
         jButton24.setText("Analyser");
+        jButton24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton24MouseClicked(evt);
+            }
+        });
 
         jButton25.setText("Donner ordonnance");
+        jButton25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton25MouseClicked(evt);
+            }
+        });
 
         jButton26.setText("Faire traitement");
+        jButton26.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton26MouseClicked(evt);
+            }
+        });
 
         hopital4.setText("Hospitaliser");
+        hopital4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone4Layout = new javax.swing.GroupLayout(button_zone4);
         button_zone4.setLayout(button_zone4Layout);
@@ -834,7 +944,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel44)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif4)))
-                .addGap(237, 237, 237))
+                .addGap(206, 206, 206))
         );
         patient_zone4Layout.setVerticalGroup(
             patient_zone4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -870,14 +980,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton28.setText("COnsulter");
+        jButton28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton28MouseClicked(evt);
+            }
+        });
 
         jButton29.setText("Analyser");
+        jButton29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton29MouseClicked(evt);
+            }
+        });
 
         jButton30.setText("Donner ordonnance");
+        jButton30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton30MouseClicked(evt);
+            }
+        });
 
         jButton31.setText("Faire traitement");
+        jButton31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton31MouseClicked(evt);
+            }
+        });
 
         hopital5.setText("Hospitaliser");
+        hopital5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone5Layout = new javax.swing.GroupLayout(button_zone5);
         button_zone5.setLayout(button_zone5Layout);
@@ -973,7 +1108,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel56)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif5)))
-                .addGap(237, 237, 237))
+                .addGap(208, 208, 208))
         );
         patient_zone5Layout.setVerticalGroup(
             patient_zone5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1062,7 +1197,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                         .addComponent(jLabel68)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(motif6)))
-                .addGap(237, 237, 237))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         patient_zone6Layout.setVerticalGroup(
             patient_zone6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1098,14 +1233,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton33.setText("COnsulter");
+        jButton33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton33MouseClicked(evt);
+            }
+        });
 
         jButton34.setText("Analyser");
+        jButton34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton34MouseClicked(evt);
+            }
+        });
 
         jButton35.setText("Donner ordonnance");
+        jButton35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton35MouseClicked(evt);
+            }
+        });
 
         jButton36.setText("Faire traitement");
+        jButton36.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton36MouseClicked(evt);
+            }
+        });
 
         hopital6.setText("Hospitaliser");
+        hopital6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone6Layout = new javax.swing.GroupLayout(button_zone6);
         button_zone6.setLayout(button_zone6Layout);
@@ -1148,14 +1308,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton38.setText("COnsulter");
+        jButton38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton38MouseClicked(evt);
+            }
+        });
 
         jButton39.setText("Analyser");
+        jButton39.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton39MouseClicked(evt);
+            }
+        });
 
         jButton40.setText("Donner ordonnance");
+        jButton40.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton40MouseClicked(evt);
+            }
+        });
 
         jButton41.setText("Faire traitement");
+        jButton41.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton41MouseClicked(evt);
+            }
+        });
 
         hopital7.setText("Hospitaliser");
+        hopital7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone7Layout = new javax.swing.GroupLayout(button_zone7);
         button_zone7.setLayout(button_zone7Layout);
@@ -1287,14 +1472,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton43.setText("COnsulter");
+        jButton43.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton43MouseClicked(evt);
+            }
+        });
 
         jButton44.setText("Analyser");
+        jButton44.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton44MouseClicked(evt);
+            }
+        });
 
         jButton45.setText("Donner ordonnance");
+        jButton45.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton45MouseClicked(evt);
+            }
+        });
 
         jButton46.setText("Faire traitement");
+        jButton46.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton46MouseClicked(evt);
+            }
+        });
 
         hopital8.setText("Hospitaliser");
+        hopital8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone8Layout = new javax.swing.GroupLayout(button_zone8);
         button_zone8.setLayout(button_zone8Layout);
@@ -1515,14 +1725,39 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton48.setText("COnsulter");
+        jButton48.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton48MouseClicked(evt);
+            }
+        });
 
         jButton49.setText("Analyser");
+        jButton49.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton49MouseClicked(evt);
+            }
+        });
 
         jButton50.setText("Donner ordonnance");
+        jButton50.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton50MouseClicked(evt);
+            }
+        });
 
         jButton51.setText("Faire traitement");
+        jButton51.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton51MouseClicked(evt);
+            }
+        });
 
         hopital9.setText("Hospitaliser");
+        hopital9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone9Layout = new javax.swing.GroupLayout(button_zone9);
         button_zone9.setLayout(button_zone9Layout);
@@ -1565,14 +1800,44 @@ public class Interface_docteur extends javax.swing.JFrame {
         button_zone10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jButton53.setText("COnsulter");
+        jButton53.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton53MouseClicked(evt);
+            }
+        });
 
         jButton54.setText("Analyser");
+        jButton54.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton54MouseClicked(evt);
+            }
+        });
 
         jButton55.setText("Donner ordonnance");
+        jButton55.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton55MouseClicked(evt);
+            }
+        });
 
         jButton56.setText("Faire traitement");
+        jButton56.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton56MouseClicked(evt);
+            }
+        });
 
         hopital10.setText("Hospitaliser");
+        hopital10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hopital10MouseClicked(evt);
+            }
+        });
+        hopital10.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                hopital10ComponentMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout button_zone10Layout = new javax.swing.GroupLayout(button_zone10);
         button_zone10.setLayout(button_zone10Layout);
@@ -1705,32 +1970,8 @@ public class Interface_docteur extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(patient_zone6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_zone6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(patient_zone7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
@@ -1746,8 +1987,32 @@ public class Interface_docteur extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(patient_zone10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(button_zone10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(button_zone10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(patient_zone6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(patient_zone5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(button_zone6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_zone5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(patient_zone3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(patient_zone2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(patient_zone1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(33, 33, 33))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(patient_zone4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(31, 31, 31)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(button_zone4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_zone3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_zone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_zone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1775,7 +2040,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(patient_zone6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_zone6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button_zone6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(patient_zone7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1803,7 +2068,7 @@ public class Interface_docteur extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1818,10 +2083,13 @@ public class Interface_docteur extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1838,13 +2106,297 @@ public class Interface_docteur extends javax.swing.JFrame {
 
     private void search_inputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_inputMouseClicked
         // TODO add your handling code here:
+        search_input.setForeground(new java.awt.Color(256, 256, 256));
         search_input.setText("");
+        
     }//GEN-LAST:event_search_inputMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void docteur_search_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docteur_search_btnMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+        List_patient=new ArrayList<Patient>();
+        query1="SELECT * FROM ticket,patient WHERE  ticket.statut=1 AND (ticket.numero='"+search_input.getText()+"' OR patient.id='"+search_input.getText()+"' OR patient.nom='"+search_input.getText()+"' OR patient.prenom='"+search_input.getText()+"') AND ticket.id_patient=patient.id AND ticket.id_bloc=?  LIMIT 0, 9;";
+        dispaly_patient();
+        supprimer_block();
+    }//GEN-LAST:event_docteur_search_btnMouseClicked
 
+    private void docteur_reset_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docteur_reset_btnMouseClicked
+        // TODO add your handling code here:
+        query1="SELECT * FROM ticket,patient WHERE ticket.statut=1 AND ticket.id_patient=patient.id AND ticket.id_bloc=?  LIMIT 0, 9;";
+        dispaly_patient();
+        search_input.setText("");
+        supprimer_block();
+    }//GEN-LAST:event_docteur_reset_btnMouseClicked
+
+    public static String action=null;
+    public static Patient current_patient=new Patient(0,"","","","","","");
+    
+    private void hopital1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital1MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(0,"hospitalisation");
+    }//GEN-LAST:event_hopital1MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(0,"Consulter");
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void traitement1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_traitement1MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(0,"traitement");
+    }//GEN-LAST:event_traitement1MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(0,"Analyser");
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(0,"Prescription");
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(1,"Consulter");
+    }//GEN-LAST:event_jButton13MouseClicked
+
+    private void traitement2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_traitement2MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(1,"Traitement");
+    }//GEN-LAST:event_traitement2MouseClicked
+
+    private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(1,"Analyser");
+    }//GEN-LAST:event_jButton14MouseClicked
+
+    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(1,"Prescription");
+    }//GEN-LAST:event_jButton15MouseClicked
+
+    private void jButton20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton20MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(2,"Prescription");
+    }//GEN-LAST:event_jButton20MouseClicked
+
+    private void jButton19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(2,"Analyser");
+    }//GEN-LAST:event_jButton19MouseClicked
+
+    private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(2,"Consulter");
+    }//GEN-LAST:event_jButton18MouseClicked
+
+    private void jButton21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton21MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(2,"Traitement");
+    }//GEN-LAST:event_jButton21MouseClicked
+
+    private void jButton23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton23MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(3,"Consulter");
+    }//GEN-LAST:event_jButton23MouseClicked
+
+    private void jButton26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton26MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(3,"Traitement");
+    }//GEN-LAST:event_jButton26MouseClicked
+
+    private void jButton24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton24MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(3,"Analyser");
+    }//GEN-LAST:event_jButton24MouseClicked
+
+    private void jButton25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton25MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(3,"Prescription");
+    }//GEN-LAST:event_jButton25MouseClicked
+
+    private void jButton31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton31MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(4,"Traitement");
+    }//GEN-LAST:event_jButton31MouseClicked
+
+    private void jButton28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton28MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(4,"Consulter");
+    }//GEN-LAST:event_jButton28MouseClicked
+
+    private void jButton29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton29MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(4,"Analyser");
+    }//GEN-LAST:event_jButton29MouseClicked
+
+    private void jButton30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton30MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(4,"Prescription");
+    }//GEN-LAST:event_jButton30MouseClicked
+
+    private void jButton36MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton36MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(5,"Traitement");
+    }//GEN-LAST:event_jButton36MouseClicked
+
+    private void jButton33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton33MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(5,"Consulter");
+    }//GEN-LAST:event_jButton33MouseClicked
+
+    private void jButton34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton34MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(5,"Analyser");
+    }//GEN-LAST:event_jButton34MouseClicked
+
+    private void jButton35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton35MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(5,"Prescription");
+    }//GEN-LAST:event_jButton35MouseClicked
+
+    private void jButton41MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton41MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(6,"Traitement");
+    }//GEN-LAST:event_jButton41MouseClicked
+
+    private void jButton38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton38MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(6,"Consulter");
+    }//GEN-LAST:event_jButton38MouseClicked
+
+    private void jButton39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton39MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(6,"Analyser");
+    }//GEN-LAST:event_jButton39MouseClicked
+
+    private void jButton40MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton40MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(6,"Prescription");
+    }//GEN-LAST:event_jButton40MouseClicked
+
+    private void jButton46MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton46MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(7,"Traitement");
+    }//GEN-LAST:event_jButton46MouseClicked
+
+    private void jButton43MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton43MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(7,"Consulter");
+    }//GEN-LAST:event_jButton43MouseClicked
+
+    private void jButton44MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton44MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(7,"Analyser");
+    }//GEN-LAST:event_jButton44MouseClicked
+
+    private void jButton45MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton45MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(7,"Prescription");
+    }//GEN-LAST:event_jButton45MouseClicked
+
+    private void jButton51MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton51MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(8,"Traitement");
+    }//GEN-LAST:event_jButton51MouseClicked
+
+    private void jButton48MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton48MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(8,"Consulter");
+    }//GEN-LAST:event_jButton48MouseClicked
+
+    private void jButton49MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton49MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(8,"Analyser");
+    }//GEN-LAST:event_jButton49MouseClicked
+
+    private void jButton50MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton50MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(8,"Prescription");
+    }//GEN-LAST:event_jButton50MouseClicked
+
+    private void hopital10ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_hopital10ComponentMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hopital10ComponentMoved
+
+    private void hopital10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital10MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(9,"hospitaliser");
+    }//GEN-LAST:event_hopital10MouseClicked
+
+    private void jButton56MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton56MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(9,"Traitement");
+    }//GEN-LAST:event_jButton56MouseClicked
+
+    private void jButton53MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton53MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(9,"Consulter");
+    }//GEN-LAST:event_jButton53MouseClicked
+
+    private void jButton54MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton54MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(9,"Analyser");
+    }//GEN-LAST:event_jButton54MouseClicked
+
+    private void jButton55MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton55MouseClicked
+        // TODO add your handling code here:
+        initialiser_prise_en_charge_interface(9,"Prescription");
+    }//GEN-LAST:event_jButton55MouseClicked
+
+    private void hopital2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital2MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(1,"hospitalisation");
+    }//GEN-LAST:event_hopital2MouseClicked
+
+    private void hopital3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital3MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(2,"hospitalisation");
+    }//GEN-LAST:event_hopital3MouseClicked
+
+    private void hopital4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital4MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(3,"hospitalisation");
+    }//GEN-LAST:event_hopital4MouseClicked
+
+    private void hopital5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital5MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(4,"hospitalisation");
+    }//GEN-LAST:event_hopital5MouseClicked
+
+    private void hopital6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital6MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(5,"hospitalisation");
+    }//GEN-LAST:event_hopital6MouseClicked
+
+    private void hopital7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital7MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(6,"hospitalisation");
+    }//GEN-LAST:event_hopital7MouseClicked
+
+    private void hopital8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital8MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(7,"hospitalisation");
+    }//GEN-LAST:event_hopital8MouseClicked
+
+    private void hopital9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopital9MouseClicked
+        // TODO add your handling code here:
+        initialiser_hospitaliser_interface(8,"hospitalisation");
+    }//GEN-LAST:event_hopital9MouseClicked
+
+    void initialiser_prise_en_charge_interface(int index, String action_name){
+        current_patient=List_patient.get(index);
+        action=action_name;
+        Prise_en_charge_interface.main(null);
+    }
+    
+    void initialiser_hospitaliser_interface(int index, String action_name){
+        current_patient=List_patient.get(index);
+        action=action_name;
+        Hospitalisation.main(null);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1880,10 +2432,12 @@ public class Interface_docteur extends javax.swing.JFrame {
         });
     }
     SQL_Outil C1= new SQL_Outil("paradis");
-    ArrayList<Patient>List_patient=new ArrayList<Patient>();
+    public ArrayList<Patient>List_patient=new ArrayList<Patient>();
     
     boolean dispaly_patient(){
         int i=0;
+        reinitialise_displayer_label();
+        List_patient=new ArrayList<Patient>();
         try{
             if(remplir_array()){
                 nom1.setText(List_patient.get(i).nom);
@@ -1956,6 +2510,7 @@ public class Interface_docteur extends javax.swing.JFrame {
                 genre10.setText(List_patient.get(i).genre);
                 motif10.setText(List_patient.get(i++).motif);
                 
+                
                 return true;
             }
             else{
@@ -1966,6 +2521,161 @@ public class Interface_docteur extends javax.swing.JFrame {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    void supprimer_block(){
+        if(nom1.getText().equals("")){
+            patient_zone1.setVisible(false);
+            button_zone1.setVisible(false); 
+        }
+        else{
+            patient_zone1.setVisible(true);
+            button_zone1.setVisible(true); 
+        }
+        if(nom2.getText().equals("")){
+            patient_zone2.setVisible(false);
+            button_zone2.setVisible(false); 
+        }
+        else{
+            patient_zone2.setVisible(true);
+            button_zone2.setVisible(true);
+        }
+        if(nom3.getText().equals("")){
+            patient_zone3.setVisible(false);
+            button_zone3.setVisible(false); 
+        }
+        else{
+            patient_zone3.setVisible(true);
+            button_zone3.setVisible(true); 
+        }
+        if(nom4.getText().equals("")){
+            patient_zone4.setVisible(false);
+            button_zone4.setVisible(false); 
+        }
+        else{
+            patient_zone4.setVisible(true);
+            button_zone4.setVisible(true); 
+        }
+        if(nom5.getText().equals("")){
+            patient_zone5.setVisible(false);
+            button_zone5.setVisible(false); 
+        }
+        else{
+            patient_zone5.setVisible(true);
+            button_zone5.setVisible(true);
+        }
+        if(nom6.getText().equals("")){
+            patient_zone6.setVisible(false);
+            button_zone6.setVisible(false); 
+        }
+        else{
+            patient_zone6.setVisible(true);
+            button_zone6.setVisible(true);
+        }
+        if(nom7.getText().equals("")){
+            patient_zone7.setVisible(false);
+            button_zone7.setVisible(false); 
+        }
+        else{
+            patient_zone7.setVisible(true);
+            button_zone7.setVisible(true);
+        }
+        if(nom8.getText().equals("")){
+            patient_zone8.setVisible(false);
+            button_zone8.setVisible(false); 
+        }
+        else{
+            patient_zone8.setVisible(true);
+            button_zone8.setVisible(true); 
+        }
+        if(nom9.getText().equals("")){
+            patient_zone9.setVisible(false);
+            button_zone9.setVisible(false); 
+        }
+        else{
+            patient_zone9.setVisible(true);
+            button_zone9.setVisible(true); 
+        }
+        if(nom10.getText().equals("")){
+            patient_zone10.setVisible(false);
+            button_zone10.setVisible(false); 
+        }
+        else{
+            patient_zone10.setVisible(true);
+            button_zone10.setVisible(true); 
+        }
+    }
+    
+    void reinitialise_displayer_label(){
+        nom1.setText("");
+        prenom1.setText("");
+        numero_ticket1.setText("");
+        date1.setText("");
+        genre1.setText("");
+        motif1.setText("");
+                
+        nom2.setText("");
+        prenom2.setText("");
+        numero_ticket2.setText("");
+        date2.setText("");
+        genre2.setText("");
+        motif2.setText("");
+                
+        nom3.setText("");
+        prenom3.setText("");
+        numero_ticket3.setText("");
+        date3.setText("");
+        genre3.setText("");
+        motif3.setText("");
+                
+        nom4.setText("");
+        prenom4.setText("");
+        numero_ticket4.setText("");
+        date4.setText("");
+        genre4.setText("");
+        motif4.setText("");
+                
+        nom5.setText("");
+        prenom5.setText("");
+        numero_ticket5.setText("");
+        date5.setText("");
+        genre5.setText("");
+        motif5.setText("");
+
+        nom6.setText("");
+        prenom6.setText("");
+        numero_ticket6.setText("");
+        date6.setText("");
+        genre6.setText("");
+        motif6.setText("");
+
+        nom7.setText("");
+        prenom7.setText("");
+        numero_ticket7.setText("");
+        date7.setText("");
+        genre7.setText("");
+        motif7.setText("");
+
+        nom8.setText("");
+        prenom8.setText("");
+        numero_ticket8.setText("");
+        date8.setText("");
+        genre8.setText("");
+        motif8.setText("");
+
+        nom9.setText("");
+        prenom9.setText("");
+        numero_ticket9.setText("");
+        date9.setText("");
+        genre9.setText("");
+        motif9.setText("");
+
+        nom10.setText("");
+        prenom10.setText("");
+        numero_ticket10.setText("");
+        date10.setText("");
+        genre10.setText("");
+        motif10.setText("");
     }
     
     boolean remplir_array(){
@@ -1989,10 +2699,10 @@ public class Interface_docteur extends javax.swing.JFrame {
     
     public Patient catchPatient(ResultSet query){
         try{
-           String numero_ticket=query.getString("numero");
+           String numero_ticket=query.getString("id");
            String motif=query.getString("motif");
            String nom=query.getString("nom");
-           int id=query.getInt("id");
+           int id=query.getInt("id_patient");
            String prenom=query.getString("prenom");
            String date=query.getString("date_naissance");
            String genre=query.getString("genre");
@@ -2044,6 +2754,8 @@ public class Interface_docteur extends javax.swing.JFrame {
     private javax.swing.JLabel date7;
     private javax.swing.JLabel date8;
     private javax.swing.JLabel date9;
+    private javax.swing.JButton docteur_reset_btn;
+    private javax.swing.JButton docteur_search_btn;
     private javax.swing.JLabel genre1;
     private javax.swing.JLabel genre10;
     private javax.swing.JLabel genre2;
@@ -2071,7 +2783,6 @@ public class Interface_docteur extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton23;
@@ -2080,7 +2791,6 @@ public class Interface_docteur extends javax.swing.JFrame {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton33;
