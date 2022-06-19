@@ -22,7 +22,7 @@ public class Patient{
         this.prenom=_prenom;
         this.date=_date;
         this.motif=_motif;
-        this.motif=_numero_ticket;
+        this.numero_ticket=_numero_ticket;
         this.genre=_genre;
     }
     

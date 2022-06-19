@@ -9,6 +9,7 @@ package paradise.objets;
  * @author Younouss boré
  */
 public class Medecin {
+    public static String id="6";
     public static String nom="";
     public static String prenom="";
     public static String email="";
