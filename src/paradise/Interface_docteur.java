@@ -4,12 +4,17 @@
  */
 package paradise;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import paradise.objets.Medecin;
-import paradise.objets.Patient;
+import java.sql.PreparedStat
+ment;
+import java.sql.Res
+ltSet;
+import java.util.Ar
+
+ionPane;
+import paradise.objet
+.Medecin;
+import paradise.obje
+s.Patient;
 import paradise.objets.SQL_Outil;
 
 /**
