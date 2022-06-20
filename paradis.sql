@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  sam. 18 juin 2022 à 14:14
+-- Généré le :  lun. 20 juin 2022 à 20:10
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.11
 
@@ -32,6 +32,18 @@ CREATE TABLE `analyse` (
   `id` int(11) NOT NULL,
   `detail` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `analyse`
+--
+
+INSERT INTO `analyse` (`id`, `detail`) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, '');
 
 -- --------------------------------------------------------
 
@@ -64,6 +76,14 @@ CREATE TABLE `chambre` (
   `id_bloc` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `chambre`
+--
+
+INSERT INTO `chambre` (`id`, `numero`, `id_bloc`) VALUES
+(1, 1, 1),
+(2, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -74,6 +94,24 @@ CREATE TABLE `consultation` (
   `id` int(11) NOT NULL,
   `detail` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `consultation`
+--
+
+INSERT INTO `consultation` (`id`, `detail`) VALUES
+(1, 'je sais pastest 000'),
+(2, 'je sais pastest 000'),
+(3, 'hj'),
+(4, 'ef'),
+(5, ''),
+(6, ''),
+(7, ''),
+(8, ''),
+(9, ''),
+(10, ''),
+(11, ''),
+(12, '');
 
 -- --------------------------------------------------------
 
@@ -87,6 +125,14 @@ CREATE TABLE `facture` (
   `id_prise_en_charge` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `facture`
+--
+
+INSERT INTO `facture` (`id`, `prix`, `id_prise_en_charge`) VALUES
+(21, 0, 21),
+(22, 0, 22);
+
 -- --------------------------------------------------------
 
 --
@@ -95,9 +141,17 @@ CREATE TABLE `facture` (
 
 CREATE TABLE `hospitalisation` (
   `id` int(11) NOT NULL,
-  `detail` int(11) DEFAULT NULL,
+  `detail` varchar(256) DEFAULT NULL,
   `id_materiel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `hospitalisation`
+--
+
+INSERT INTO `hospitalisation` (`id`, `detail`, `id_materiel`) VALUES
+(1, 'Un sejour de 26 jours', 2),
+(2, 'Un sejour de 11 jours', 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +166,14 @@ CREATE TABLE `materiel` (
   `etat` tinyint(1) NOT NULL,
   `id_chambre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `materiel`
+--
+
+INSERT INTO `materiel` (`id`, `nom`, `numero`, `etat`, `id_chambre`) VALUES
+(1, 'lit', 1, 1, 1),
+(2, 'lit', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -176,6 +238,34 @@ CREATE TABLE `prise_en_charge` (
   `id_hospitalisation` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `prise_en_charge`
+--
+
+INSERT INTO `prise_en_charge` (`id`, `date`, `id_patient`, `id_consultation`, `id_ordonnance`, `id_analyse`, `id_traitement`, `id_hospitalisation`) VALUES
+(1, '2022-06-18 23:26:45', 8, 1, NULL, NULL, NULL, NULL),
+(2, '2022-06-18 23:27:01', 8, 2, NULL, NULL, NULL, NULL),
+(3, '2022-06-18 23:29:11', 6, 3, NULL, NULL, NULL, NULL),
+(4, '2022-06-18 23:32:08', 6, 4, NULL, NULL, NULL, NULL),
+(5, '2022-06-18 23:33:23', 6, NULL, NULL, NULL, 1, NULL),
+(6, '2022-06-18 23:35:34', 6, NULL, NULL, NULL, 2, NULL),
+(7, '2022-06-19 00:00:26', 9, 5, NULL, NULL, NULL, NULL),
+(8, '2022-06-19 00:01:57', 7, 6, NULL, NULL, NULL, NULL),
+(9, '2022-06-19 00:16:49', 9, 7, NULL, NULL, NULL, NULL),
+(10, '2022-06-19 00:17:30', 7, 8, NULL, NULL, NULL, NULL),
+(11, '2022-06-19 00:17:40', 7, 9, NULL, NULL, NULL, NULL),
+(12, '2022-06-19 00:17:43', 7, 10, NULL, NULL, NULL, NULL),
+(13, '2022-06-19 00:17:51', 14, NULL, NULL, 1, NULL, NULL),
+(14, '2022-06-19 00:17:54', 14, NULL, NULL, 2, NULL, NULL),
+(15, '2022-06-19 00:17:56', 14, 11, NULL, NULL, NULL, NULL),
+(16, '2022-06-19 00:17:59', 14, 12, NULL, NULL, NULL, NULL),
+(17, '2022-06-19 00:18:02', 14, NULL, NULL, 3, NULL, NULL),
+(18, '2022-06-19 00:19:25', 7, NULL, NULL, 4, NULL, NULL),
+(19, '2022-06-19 00:19:30', 14, NULL, NULL, 5, NULL, NULL),
+(20, '2022-06-19 00:21:00', 9, NULL, NULL, 6, NULL, NULL),
+(21, '2022-06-19 02:09:15', 7, NULL, NULL, NULL, NULL, 1),
+(22, '2022-06-20 13:55:08', 14, NULL, NULL, NULL, NULL, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -187,6 +277,32 @@ CREATE TABLE `relation_prise_en_charge` (
   `id_user` int(11) NOT NULL,
   `id_prise_en_charge` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `relation_prise_en_charge`
+--
+
+INSERT INTO `relation_prise_en_charge` (`id`, `id_user`, `id_prise_en_charge`) VALUES
+(1, 6, 3),
+(2, 6, 4),
+(3, 6, 5),
+(4, 6, 6),
+(5, 6, 7),
+(6, 6, 8),
+(7, 6, 9),
+(8, 6, 10),
+(9, 6, 11),
+(10, 6, 12),
+(11, 6, 13),
+(12, 6, 14),
+(13, 6, 15),
+(14, 6, 16),
+(15, 6, 17),
+(16, 6, 18),
+(17, 6, 19),
+(18, 6, 20),
+(19, 6, 21),
+(20, 6, 22);
 
 -- --------------------------------------------------------
 
@@ -223,6 +339,14 @@ CREATE TABLE `traitement` (
   `id` int(11) NOT NULL,
   `detail` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `traitement`
+--
+
+INSERT INTO `traitement` (`id`, `detail`) VALUES
+(1, 'db'),
+(2, '');
 
 -- --------------------------------------------------------
 
@@ -365,7 +489,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `analyse`
 --
 ALTER TABLE `analyse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `bloc`
@@ -377,31 +501,31 @@ ALTER TABLE `bloc`
 -- AUTO_INCREMENT pour la table `chambre`
 --
 ALTER TABLE `chambre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `consultation`
 --
 ALTER TABLE `consultation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `facture`
 --
 ALTER TABLE `facture`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `hospitalisation`
 --
 ALTER TABLE `hospitalisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `materiel`
 --
 ALTER TABLE `materiel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `ordonnance`
@@ -419,13 +543,13 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT pour la table `prise_en_charge`
 --
 ALTER TABLE `prise_en_charge`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `relation_prise_en_charge`
 --
 ALTER TABLE `relation_prise_en_charge`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `ticket`
@@ -437,7 +561,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT pour la table `traitement`
 --
 ALTER TABLE `traitement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `user`
